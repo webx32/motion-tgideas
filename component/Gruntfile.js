@@ -70,12 +70,22 @@ module.exports = function(grunt) {
 
   grunt.registerTask('setFile','set file name', function(file){
       var fileName = file.replace(/\|/g,'_');
+      var plugReg = /(\S*?)\((\S*?)\)/;
+      var plugins = [];
       var filesSrc = file.split('|').map(function(src){
-        return src + '/' + src + '.js';
+        var compName = src, compInfo,pluginName;
+        if(compInfo = compName.match(plugReg)){//contains plugins
+          compName = compInfo[1];
+          var pluginNames = compInfo[2].split(',');
+          while(pluginName=pluginNames.shift()){
+            plugins.push(compName + '/plugins/' + pluginName + '.js');
+          }
+        }
+        return compName + '/' + compName + '.js';
       });
       var uglifyOpt = {}
       uglifyOpt['build/'+fileName+'.min.js'] = ['build/'+fileName+'.js'];
-      grunt.config.set('motion_build.dev.files.0.src', filesSrc);
+      grunt.config.set('motion_build.dev.files.0.src', filesSrc.concat(plugins));
       grunt.config.set('uglify.dev.files', uglifyOpt);
       grunt.config.set('uglify.dev.options.banner', "/*! motion v<%= pkg.version %> | " +
             "(c) <%= grunt.template.today('yyyy') %>, <%= grunt.template.today('yyyy/mm/dd') %> | "+file.replace(/\|/g,' ')+" | motion Foundation, Inc. */\r\n");
