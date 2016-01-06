@@ -69,7 +69,7 @@ define(function(require, exports, module) {
 				'.'+config.prefix+'_landscape{width:100%; height:100%; background:'+config.bgcolor+';position: fixed; left:0;top: 0;z-index:'+config.zIndex+'; display:none; text-align: center;}'
 				+'.'+config.prefix+'_landscape_box{position: relative; margin-left: auto; margin-right: auto; top: 50%; transform:translateY(-50%); -webkit-transform:translateY(-50%);}'
 				+'.'+config.prefix+'_landscape span{font-size:22px;display:block;color:'+config.txtColor+'; text-align:center;width: 100%;padding-top: 10px; line-height:2;}'
-				+'.'+config.prefix+'_landscape img{-webkit-animation: Shine_landscapeAni 1.5s ease infinite alternate;animation: Shine_landscapeAni 1.5s ease infinite alternate;}'
+				+'.'+config.prefix+'_landscape img{-webkit-animation: '+config.prefix+'_landscapeAni 1.5s ease infinite alternate;animation: '+config.prefix+'_landscapeAni 1.5s ease infinite alternate;}'
 				+'@-webkit-keyframes '+config.prefix+'_landscapeAni{0% {-webkit-transform:rotate(-90deg);}30% {-webkit-transform:rotate(-90deg);}70%{-webkit-transform:rotate(0deg);}100% {-webkit-transform:rotate(0deg);}}'
 				+'@keyframes '+config.prefix+'_landscapeAni{0% {transform:rotate(-90deg);}30% {transform:rotate(-90deg);}70%{transform:rotate(0deg);}100% {transform:rotate(0deg);}}';
 				var style = document.createElement("style");
