@@ -84,7 +84,6 @@ define(function(require, exports, module) {
 			    landscapeDom.id = config.prefix+'_landscape'; 
 			    landscapeDom.innerHTML = '<div class="'+config.prefix+'_landscape_box"><img src="'+config.pic+'" id="'+config.prefix+'_landscape_pic'+'" /><span>'+config.txt+'</span></div>';
 			    document.getElementsByTagName("body")[0].appendChild(landscapeDom);
-				var img_url = _this.pic;
 				var img = new Image();
 				img.src = config.pic;
 				img.onload = function(){
@@ -94,9 +93,9 @@ define(function(require, exports, module) {
 			}
 			function landscape(){
 			 	if(document.body.clientWidth > document.body.clientHeight){
-		            document.getElementById(_this.option.prefix+'_landscape').style.display = (_this.option.mode=="portrait"?"block":"none");
+		            document.getElementById(config.prefix+'_landscape').style.display = (config.mode=="portrait"?"block":"none");
 		        }else{
-		        	document.getElementById(_this.option.prefix+'_landscape').style.display = (_this.option.mode=="portrait"?"none":"block");
+		        	document.getElementById(config.prefix+'_landscape').style.display = (config.mode=="portrait"?"none":"block");
 		        }  
 			}
 			createCss();
@@ -104,16 +103,16 @@ define(function(require, exports, module) {
 			window.addEventListener('DOMContentLoaded',function(){
 				setTimeout(function(){
 					landscape();
-					if(_this.option.init){
-		                _this.option.init();
+					if(config.init){
+		                config.init();
 		            }
 				},50);
 			});
 			window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", function(){
 				if(window.orientation==180 || window.orientation==0 || window.orientation==90 || window.orientation==-90){
 					landscape();
-					if(_this.option.landback){
-		                _this.option.landback();
+					if(config.landback){
+		                config.landback();
 		            }
 				}
 			}, false);
